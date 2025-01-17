@@ -8,7 +8,7 @@
 
 ## References and Resources
 
-N/A
+[Android Documentation](https://developer.android.com/develop/ui/views/layout/linear) for a linear layout
 
 ## Verbal Collaboration
 
