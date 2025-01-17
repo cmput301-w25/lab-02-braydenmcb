@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,14 +53,41 @@ public class MainActivity extends AppCompatActivity {
         Button removeButton = findViewById(R.id.remove_button);
         removeButton.setEnabled(false);
 
+        LinearLayout addCityDialog = findViewById(R.id.add_city_dialog);
+        Button confirmButton = findViewById(R.id.confirm_button);
+        EditText addCityText = findViewById(R.id.add_city_text);
+        addCityDialog.setEnabled(false);
+        addCityDialog.setVisibility(View.INVISIBLE);
+        addCityText.setEnabled(false);
+        confirmButton.setEnabled(false);
+
+
+
         addButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                addCityDialog.setEnabled(true);
+                addCityDialog.setVisibility(View.VISIBLE);
+                addCityText.setEnabled(true);
+                confirmButton.setEnabled(true);
+            }});
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // pop up a dialog box to add a city
-                // add the city to the listview
-
+                String input = addCityText.getText().toString();
+                if (!input.isEmpty()) {
+                    dataList.add(input);
+                }
+                addCityText.setText("");
+                cityAdapter.notifyDataSetChanged();
+                addCityDialog.setEnabled(false);
+                addCityText.setEnabled(false);
+                confirmButton.setEnabled(false);
+                addCityDialog.setVisibility(View.INVISIBLE);
             }
         });
+
 
 
         // for remove button
